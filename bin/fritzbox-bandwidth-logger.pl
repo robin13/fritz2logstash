@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use YAML;
 use Getopt::Long;
-use API::FritzBox;
+use WebService::FritzBox;
 use Time::HiRes qw/time/;
 use JSON;
 use POSIX qw/strftime/;
