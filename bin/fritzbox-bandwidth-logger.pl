@@ -27,7 +27,7 @@ if( $params{loglevel} ){
     $logger->level( $params{loglevel} );
 }
     
-my $fb = API::FritzBox->new( %fb_params );
+my $fb = WebService::FritzBox->new( %fb_params );
 open( my $fh, '>>', $params{output} ) or die( $! );
 
 while( 1 ) {
