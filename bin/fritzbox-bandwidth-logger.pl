@@ -31,11 +31,15 @@ my $fb = API::FritzBox->new( %fb_params );
 open( my $fh, '>>', $params{output} ) or die( $! );
 
 while( 1 ) {
-    my $document = $fb->bandwidth();
-    $document->{'@timestamp'} = _es_timestamp();
-    print $fh '' . encode_json( $document ) . "\n";
-    $fh->flush();
-    $logger->debug( Dump( $document ) ) if $logger->is_debug;
+    try{
+        my $document = $fb->bandwidth();
+        $document->{'@timestamp'} = _es_timestamp();
+        print $fh '' . encode_json( $document ) . "\n";
+        $fh->flush();
+        $logger->debug( Dump( $document ) ) if $logger->is_debug;
+    }catch{
+        WARN( $_ );
+    };
     sleep( 5 );
 }
 close $fh;
