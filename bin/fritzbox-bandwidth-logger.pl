@@ -1,5 +1,5 @@
 #!/usr/bin/env perl
-# ABSTRACT: FritzBox data to logstash
+# ABSTRACT: FritzBox bandwidth data to one-document-per line json documents for processing by 
 use strict;
 use warnings;
 use YAML;
@@ -39,6 +39,7 @@ while( 1 ) {
         $logger->debug( Dump( $document ) ) if $logger->is_debug;
     }catch{
         WARN( $_ );
+        $fb = WebService::FritzBox->new( %fb_params );
     };
     sleep( 5 );
 }
